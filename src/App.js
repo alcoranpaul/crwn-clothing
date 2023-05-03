@@ -13,7 +13,6 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<NavigationBar />}>
-        {/* Use this route below as the default for "/" */}
         <Route index element={<Home />} />
         <Route path="shop" element={<Shop />} />
         <Route path="signIn" element={<SignIn />} />
