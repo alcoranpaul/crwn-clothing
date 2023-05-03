@@ -1,13 +1,18 @@
-import { initializeApp } from 'firebase/app' //Creates an app instance based on config
-import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { initializeApp } from 'firebase/app' // Creates an app instance based on config
+import {
+    getAuth,
+    signInWithRedirect,
+    signInWithPopup,
+    GoogleAuthProvider
+} from 'firebase/auth'
 import {
     getFirestore,
-    doc,        //retrieve documents in fire store
-    getDoc,     //Get data in documents
-    setDoc      //Set data in documents
+    doc,        // Retrieve documents in Firestore
+    getDoc,     // Get data in documents
+    setDoc      // Set data in documents
 } from 'firebase/firestore'
 
-// Your web app's Firebase configuration
+// Firebase configuration object
 const firebaseConfig = {
     apiKey: "AIzaSyDnt-TMMWjyXhPgTQI-Wp3hK93__GcrDN8",
     authDomain: "crwn-db-c4507.firebaseapp.com",
@@ -17,25 +22,33 @@ const firebaseConfig = {
     appId: "1:930703525044:web:3fd7d09f9005db367983e1"
 };
 
-// Initialize Firebase
+// Initialize Firebase app instance
 const firebaseApp = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider(); //Connected with google auth
-provider.setCustomParameters({
+// Initialize Google authentication provider
+const googleProvider = new GoogleAuthProvider(); // Connected with Google Auth
+googleProvider.setCustomParameters({
     prompt: "select_account"
 });
 
-export const auth = getAuth(); //Same authentication with different providers
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider) //Connected with custom authentication
+// Get the authentication object
+export const auth = getAuth(); // Same authentication with different providers
+
+// Define functions to sign in with Google
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider) // Connected with custom authentication
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider) // Connected with custom authentication
+
+// Get the Firestore object
 export const db = getFirestore();
 
+// Function to create a user document from authentication information
 export const createUserDocumentFromAuth = async (userAuth) => {
-    const userDocRef = doc(db, 'users', userAuth.uid); //Go to collection 'users'
+    const userDocRef = doc(db, 'users', userAuth.uid); // Go to collection 'users'
     const userSnapshot = await getDoc(userDocRef);
 
-    if (!userSnapshot.exists()) { //Create new user
+    if (!userSnapshot.exists()) { // Create new user if user does not exist
         const { displayName, email } = userAuth;
-        const createdAt = new Date()
+        const createdAt = new Date();
         try {
             await setDoc(userDocRef, {
                 displayName,
@@ -43,9 +56,9 @@ export const createUserDocumentFromAuth = async (userAuth) => {
                 createdAt
             });
         } catch (err) {
-            console.log('error creating user', err.message)
+            console.log('error creating user', err.message);
         }
     }
 
-    return userDocRef
+    return userDocRef; // Return the user document reference
 }
