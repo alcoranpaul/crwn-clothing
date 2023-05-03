@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import NavigationBar from "./routes/navigation/navigation.component";
 import Home from "./routes/home/home.component";
+import SignIn from "./routes/sign-in/signin.component";
 
 
 function Shop() {
@@ -15,6 +16,7 @@ function App() {
         {/* Use this route below as the default for "/" */}
         <Route index element={<Home />} />
         <Route path="shop" element={<Shop />} />
+        <Route path="signIn" element={<SignIn />} />
       </Route>
     </Routes>
   )
