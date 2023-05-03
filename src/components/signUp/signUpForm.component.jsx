@@ -22,7 +22,7 @@ function SignUpForm() {
     const { name, value } = event.target;
 
     // Use the spread operator to copy the existing form fields and update the value of the field with the given name
-    setFormFields({ ...formFields, [name]: value });
+    setFormFields({ ...formFields, [name]: value }); 
   }
 
 
@@ -30,7 +30,7 @@ function SignUpForm() {
   return (
     <div>
       <h1>Sign up with your email and password</h1>
-      <form onSubmit={() => {}}>
+      <form onSubmit={() => {}}> {/* add an onSubmit handler that calls a function to handle form submission */}
         <label>Display Name</label>
         <input type='text' required onChange={handleChange} name='displayName' value={displayName}/>
 
