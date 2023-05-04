@@ -1,9 +1,24 @@
+/*
+ * File: firebase.utils.js
+ * Project: crwn-clothing
+ * File Created: Tuesday, 2nd May 2023 9:52:19 pm
+ * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
+ * GitHub: https://github.com/alcoranpaul
+ * -----
+ * Last Modified: Wednesday, 3rd May 2023 11:51:00 pm
+ * Modified By: PR (paulreyes74@yahoo.com>)
+ * -----
+ * Description: Firebase utility functions
+ */
+
+//Imports
 import { initializeApp } from 'firebase/app' // Creates an app instance based on config
 import {
     getAuth,
     signInWithRedirect,
     signInWithPopup,
-    GoogleAuthProvider
+    GoogleAuthProvider,
+    createUserWithEmailAndPassword
 } from 'firebase/auth'
 import {
     getFirestore,
@@ -25,10 +40,10 @@ const firebaseConfig = {
 // Initialize Firebase app instance
 const firebaseApp = initializeApp(firebaseConfig);
 
-// Initialize Google authentication provider
-const googleProvider = new GoogleAuthProvider(); // Connected with Google Auth
+// Get the Google authentication provider object
+const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
-    prompt: "select_account"
+    prompt: "select_account" // Always trigger Google pop-up whenever we use GoogleAuthProvider for authentication and sign in
 });
 
 // Get the authentication object
@@ -41,24 +56,46 @@ export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googlePro
 // Get the Firestore object
 export const db = getFirestore();
 
-// Function to create a user document from authentication information
-export const createUserDocumentFromAuth = async (userAuth) => {
-    const userDocRef = doc(db, 'users', userAuth.uid); // Go to collection 'users'
-    const userSnapshot = await getDoc(userDocRef);
+/** Function to create a user document from the user authentication object
+ * @param {*} userAuth - User authentication object
+ * @param {*} additionalInformation  - Additional information to be added to the user document
+ * @returns - User document reference
+ */
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {
+    if (!userAuth) return;
+
+    const userDocRef = doc(db, 'users', userAuth.uid); // Go to collection 'users' and document with userAuth.uid
+    const userSnapshot = await getDoc(userDocRef); // Get the user document
 
     if (!userSnapshot.exists()) { // Create new user if user does not exist
         const { displayName, email } = userAuth;
         const createdAt = new Date();
+
+        // Create user document
         try {
             await setDoc(userDocRef, {
                 displayName,
                 email,
-                createdAt
+                createdAt,
+                ...additionalInformation // Spread additional information
             });
         } catch (err) {
-            console.log('error creating user', err.message);
+            console.log('Error creating user', err.message)
         }
     }
 
     return userDocRef; // Return the user document reference
+}
+
+/** Function to create a user with email and password
+ * 
+ * @param {*} email - User email
+ * @param {*} password - User password
+ * @returns 
+ */
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+
+    // Create user with email and password
+    return await createUserWithEmailAndPassword(auth, email, password);
 }
