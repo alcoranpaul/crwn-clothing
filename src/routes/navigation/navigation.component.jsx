@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 4th May 2023 12:03:27 am
+ * Last Modified: Thursday, 4th May 2023 1:05:26 am
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -27,11 +27,9 @@ function NavigationBar() {
     <Fragment>
       <div className='navigation'>
         <Link className='logo-container' to='/'>
-          // Renders logo on the left side
           <CrwnLogo className='logo' />
         </Link>
         <div className='nav-links-container'>
-          // Renders links on the right side
           <Link className='nav-link' to='/shop'>
             SHOP
           </Link>

@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Wednesday, 3rd May 2023 11:51:33 pm
+ * Last Modified: Thursday, 4th May 2023 1:09:58 am
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -13,7 +13,7 @@
  */
 
 import { useState } from 'react'; // import the useState hook from the React library
-import { createAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 
 // set up an object with default values for the form fields
 const defaultFormFields = {
@@ -23,6 +23,7 @@ const defaultFormFields = {
   confirmPassword: '',
 };
 
+
 // Changes the form fields to the values entered by the user
 function SignUpForm() {
   // use the useState hook to create state variables for the form fields
@@ -30,7 +31,17 @@ function SignUpForm() {
 
   const { displayName, email, password, confirmPassword } = formFields;
 
-  // define a function that handles changes to the form fields
+  /**
+   * Resets the form fields to their default values
+   */
+  function resetFormFields() {
+    setFormFields(defaultFormFields);
+  }
+
+  /** Handles changes to the form fields
+   * 
+   * @param {*} event
+   */
   function handleChange(event) {
     event.preventDefault();
     // destructure the name and value of the changed field from the event object
@@ -40,8 +51,12 @@ function SignUpForm() {
     setFormFields({ ...formFields, [name]: value });
   }
 
-  // handles form submission
-  const handleSubmit = async (event) => {
+  /** Handles the form submit event
+   *  
+   * @param {*} event 
+   * @returns if success: creates a new user account with the email and password from firebase
+   */
+  async function handleSubmit(event) {
     event.preventDefault(); // prevent the default form submit behaviour
 
     // confirm password === confirmPassword
@@ -52,12 +67,17 @@ function SignUpForm() {
 
     try {
       // create a new user account with the email and password from firebase
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password,
-      );
-    } catch (err) {
-      console.log('Error creating user with email and password', err);
+      const { user } = await createAuthUserWithEmailAndPassword(email, password,);
+      await createUserDocumentFromAuth(user, { displayName }); // create a new user document in firestore with the user object from firebase auth
+      resetFormFields(); // reset the form fields
+    }
+    catch (err) {
+      if (err.code === 'auth/email-already-in-use') {
+        alert('Email already in use')
+      }
+      else {
+        console.log('Error creating user with email and password', err);
+      }
     }
   };
 

@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Wednesday, 3rd May 2023 11:51:00 pm
+ * Last Modified: Thursday, 4th May 2023 12:24:33 am
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * Description: Firebase utility functions
@@ -27,6 +27,8 @@ import {
     setDoc      // Set data in documents
 } from 'firebase/firestore'
 
+//************************************* Firebase configuration *************************************************//
+//**************************************************************************************************************//
 // Firebase configuration object
 const firebaseConfig = {
     apiKey: "AIzaSyDnt-TMMWjyXhPgTQI-Wp3hK93__GcrDN8",
@@ -40,6 +42,8 @@ const firebaseConfig = {
 // Initialize Firebase app instance
 const firebaseApp = initializeApp(firebaseConfig);
 
+//************************************* Google Authentication *************************************************//
+//**************************************************************************************************************//
 // Get the Google authentication provider object
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
@@ -53,6 +57,8 @@ export const auth = getAuth(); // Same authentication with different providers
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider) // Connected with custom authentication
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider) // Connected with custom authentication
 
+//************************************* Firebase database functions ********************************************//
+//**************************************************************************************************************//
 // Get the Firestore object
 export const db = getFirestore();
 
