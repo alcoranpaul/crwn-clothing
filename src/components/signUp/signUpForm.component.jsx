@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 4th May 2023 1:09:58 am
+ * Last Modified: Monday, 8th May 2023 12:31:05 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -14,6 +14,7 @@
 
 import { useState } from 'react'; // import the useState hook from the React library
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
+import FormInput from '../form-input/form-input.component';
 
 // set up an object with default values for the form fields
 const defaultFormFields = {
@@ -28,11 +29,9 @@ const defaultFormFields = {
 function SignUpForm() {
   // use the useState hook to create state variables for the form fields
   const [formFields, setFormFields] = useState(defaultFormFields);
-
   const { displayName, email, password, confirmPassword } = formFields;
 
-  /**
-   * Resets the form fields to their default values
+  /** Resets the form fields to their default values
    */
   function resetFormFields() {
     setFormFields(defaultFormFields);
@@ -86,32 +85,32 @@ function SignUpForm() {
     <div>
       <h1>Sign up with your email and password</h1>
       <form onSubmit={handleSubmit}>
-        <label>Display Name</label>
-        <input
+        <FormInput
+          label="Display Name"
           type='text'
           required
           onChange={handleChange}
           name='displayName'
           value={displayName}
         />
-        <label>Email</label>
-        <input
-          type='email'
+        <FormInput
+          label="Email"
+          type='email,'
           required
           onChange={handleChange}
           name='email'
           value={email}
         />
-        <label>Password</label>
-        <input
+        <FormInput
+          label="Password"
           type='password'
           required
           onChange={handleChange}
           name='password'
           value={password}
         />
-        <label>Confirm Password</label>
-        <input
+        <FormInput
+          label="Confirm Password"
           type='password'
           required
           onChange={handleChange}
