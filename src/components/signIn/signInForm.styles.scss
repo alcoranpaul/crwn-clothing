@@ -5,20 +5,24 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 4:11:51 pm
+ * Last Modified: Monday, 8th May 2023 4:24:59 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description:
  */
 
- .sign-up-container{
-    // background-color: red;
+ .sign-up-container {
     display: flex;
     flex-direction: column;
     width: 380px;
-
-    h2{
-        margin: 10px 0;
+  
+    h2 {
+      margin: 10px 0;
     }
- }
+  
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+    }
+  }

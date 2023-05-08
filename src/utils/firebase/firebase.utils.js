@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 4th May 2023 12:24:33 am
+ * Last Modified: Monday, 8th May 2023 4:22:19 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * Description: Firebase utility functions
@@ -18,7 +18,8 @@ import {
     signInWithRedirect,
     signInWithPopup,
     GoogleAuthProvider,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
 } from 'firebase/auth'
 import {
     getFirestore,
@@ -40,6 +41,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase app instance
+// eslint-disable-next-line
 const firebaseApp = initializeApp(firebaseConfig);
 
 //************************************* Google Authentication *************************************************//
@@ -104,4 +106,11 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 
     // Create user with email and password
     return await createUserWithEmailAndPassword(auth, email, password);
+}
+
+export const signInEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+
+    // Create user with email and password
+    return await signInWithEmailAndPassword(auth, email, password);
 }

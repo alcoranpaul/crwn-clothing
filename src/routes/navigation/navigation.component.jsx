@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 4th May 2023 1:05:26 am
+ * Last Modified: Monday, 8th May 2023 4:11:05 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -33,7 +33,7 @@ function NavigationBar() {
           <Link className='nav-link' to='/shop'>
             SHOP
           </Link>
-          <Link className='nav-link' to='/signIn'>
+          <Link className='nav-link' to='/auth'>
             SIGN IN
           </Link>
         </div>

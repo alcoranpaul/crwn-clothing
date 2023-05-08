@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Wednesday, 3rd May 2023 11:53:08 pm
+ * Last Modified: Monday, 8th May 2023 4:09:37 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -17,7 +17,7 @@ import { Routes, Route } from "react-router-dom";
 
 import NavigationBar from "./routes/navigation/navigation.component";
 import Home from "./routes/home/home.component";
-import SignIn from "./routes/sign-in/signin.component";
+import Authentication from "./routes/authentication/authentication.component";
 
 
 function Shop() { // Temporary
@@ -26,11 +26,11 @@ function Shop() { // Temporary
 
 function App() {
   return (
-    <Routes> // Routes are defined here
-      <Route path="/" element={<NavigationBar />}> // Navigation bar is always visible
+    <Routes>
+      <Route path="/" element={<NavigationBar />}>
         <Route index element={<Home />} />
         <Route path="shop" element={<Shop />} />
-        <Route path="signIn" element={<SignIn />} />
+        <Route path="auth" element={<Authentication />} />
       </Route>
     </Routes>
   )

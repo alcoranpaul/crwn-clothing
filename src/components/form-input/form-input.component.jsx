@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 12:36:08 pm
+ * Last Modified: Monday, 8th May 2023 3:30:41 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -18,7 +18,7 @@ export default function FormInput({ label, ...otherProps }) {
     return (
         <div className="group">
             <input className="form-input" {...otherProps} /> {/* the spread operator passes all the props to the input element */}
-            {label && <label className={`${otherProps.value.length ? `shrink` : ''} form-input-label`}>{label}</label>}
+            {label && <label className={`${otherProps.value.length ? `shrink` : ``} form-input-label`}>{label}</label>}
         </div>
     );
 };
