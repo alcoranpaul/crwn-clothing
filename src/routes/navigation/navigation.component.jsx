@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 4:11:05 pm
+ * Last Modified: Monday, 8th May 2023 4:44:51 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -14,7 +14,6 @@
 
 import { Outlet, Link } from 'react-router-dom'; // Outlet is a component that renders the child route's component
 import { Fragment } from 'react'; // Fragment is a component that allows multiple components to be rendered without a parent div
-
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 import './navigation.style.scss';
 
