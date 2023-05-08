@@ -5,17 +5,18 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 4:38:13 pm
+ * Last Modified: Monday, 8th May 2023 5:07:39 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description: This component is the sign up form
  */
 
-import { useState } from 'react'; // import the useState hook from the React library
+import { useState, useContext } from 'react'; // import the useState hook from the React library
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/Button.component';
+import { UserContext } from '../../contexts/user.contexts';
 import './signUpForm.styles.scss';
 
 // set up an object with default values for the form fields
@@ -32,6 +33,7 @@ function SignUpForm() {
   // use the useState hook to create state variables for the form fields
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const { setCurrentUser } = useContext(UserContext);
 
   /** Resets the form fields to their default values
    */
@@ -69,6 +71,8 @@ function SignUpForm() {
     try {
       // create a new user account with the email and password from firebase
       const { user } = await createAuthUserWithEmailAndPassword(email, password,);
+      setCurrentUser(user); // set the current user in the user context
+
       await createUserDocumentFromAuth(user, { displayName }); // create a new user document in firestore with the user object from firebase auth
       resetFormFields(); // reset the form fields
     }

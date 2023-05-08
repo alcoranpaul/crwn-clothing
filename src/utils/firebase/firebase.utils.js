@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 4:22:19 pm
+ * Last Modified: Monday, 8th May 2023 5:14:15 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * Description: Firebase utility functions
@@ -19,7 +19,8 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signOut
 } from 'firebase/auth'
 import {
     getFirestore,
@@ -108,9 +109,21 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
     return await createUserWithEmailAndPassword(auth, email, password);
 }
 
+/** Function to sign in with email and password 
+ * 
+ * @param {*} email
+ * @param {*} password 
+ * @returns 
+ */
 export const signInEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
 
     // Create user with email and password
     return await signInWithEmailAndPassword(auth, email, password);
 }
+
+/** Function to sign out user
+ * 
+ * @returns 
+ */
+export const signOutUser = async () => await signOut(auth);
