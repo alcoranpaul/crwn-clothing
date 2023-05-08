@@ -1,0 +1,61 @@
+/*
+ * File: Button.styles.scss
+ * Project: crwn-clothing
+ * File Created: Monday, 8th May 2023 2:17:19 pm
+ * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
+ * GitHub: https://github.com/alcoranpaul
+ * -----
+ * Last Modified: Monday, 8th May 2023 2:22:12 pm
+ * Modified By: PR (paulreyes74@yahoo.com>)
+ * -----
+ * -----
+ * Description:
+ */
+
+ .button-container {
+    min-width: 165px;                         // Minimum width of the container
+    width: auto;                              // Width adjusts based on content
+    height: 50px;                             // Height of the container
+    letter-spacing: 0.5px;                    // Spacing between letters
+    line-height: 50px;                        // Line height equal to container height
+    padding: 0 35px 0 35px;                   // Padding around the content
+    font-size: 15px;                          // Font size
+    background-color: black;                  // Background color
+    color: white;                             // Text color
+    text-transform: uppercase;                // Transform text to uppercase
+    font-family: 'Open Sans Condensed';       // Font family
+    font-weight: bolder;                      // Font weight
+    border: none;                             // No border
+    cursor: pointer;                          // Cursor style as pointer
+    display: flex;                            // Display as flex container
+    justify-content: center;                  // Center content horizontally
+    
+    &:hover {                                 // Styles on hover
+      background-color: white;                // Background color on hover
+      color: black;                           // Text color on hover
+      border: 1px solid black;                // Border on hover
+    }
+    
+    &.google-sign-in {                        // Styles for the '.google-sign-in' class
+      background-color: #4285f4;              // Background color for Google sign-in
+      color: white;                           // Text color for Google sign-in
+      
+      &:hover {                               // Styles for Google sign-in on hover
+        background-color: #357ae8;            // Background color on hover
+        border: none;                         // No border on hover
+      }
+    }
+    
+    &.inverted {                              // Styles for the '.inverted' class
+      background-color: white;                // Background color for inverted style
+      color: black;                           // Text color for inverted style
+      border: 1px solid black;                // Border for inverted style
+      
+      &:hover {                               // Styles for inverted style on hover
+        background-color: black;              // Background color on hover
+        color: white;                         // Text color on hover
+        border: none;                         // No border on hover
+      }
+    }
+  }
+  

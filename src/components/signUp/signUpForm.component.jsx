@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 12:31:05 pm
+ * Last Modified: Monday, 8th May 2023 2:24:39 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -15,6 +15,8 @@
 import { useState } from 'react'; // import the useState hook from the React library
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/form-input.component';
+import Button from '../button/Button.component';
+import './signUpForm.styles.scss';
 
 // set up an object with default values for the form fields
 const defaultFormFields = {
@@ -82,8 +84,9 @@ function SignUpForm() {
 
   // return the form JSX
   return (
-    <div>
-      <h1>Sign up with your email and password</h1>
+    <div className='sign-up-container'>
+      <h2>Don't have an account?</h2>
+      <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Display Name"
@@ -117,7 +120,7 @@ function SignUpForm() {
           name='confirmPassword'
           value={confirmPassword}
         />
-        <button type='submit'>Submit</button>
+        <Button buttonType='' type='submit'>Submit</Button>
       </form>
     </div>
   );
