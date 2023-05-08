@@ -5,11 +5,11 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 2:24:39 pm
+ * Last Modified: Monday, 8th May 2023 4:38:13 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
- * Description: This component is the sign up form for the sign up page
+ * Description: This component is the sign up form
  */
 
 import { useState } from 'react'; // import the useState hook from the React library
