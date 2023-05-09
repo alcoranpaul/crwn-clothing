@@ -5,18 +5,17 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 4:59:21 pm
+ * Last Modified: Monday, 8th May 2023 8:18:06 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description: Sign in form for Email and password
  */
 
-import { useState, useContext } from 'react'; // import the useState hook from the React library
+import { useState } from 'react'; // import the useState hook from the React library
 import { signInWithGooglePopup, createUserDocumentFromAuth, signInEmailAndPassword } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/Button.component';
-import { UserContext } from '../../contexts/user.contexts';
 import './signInForm.styles.scss'
 
 
@@ -32,7 +31,6 @@ function SignInForm() {
   // use the useState hook to create state variables for the form fields
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  const { setCurrentUser } = useContext(UserContext);
 
   /** Resets the form fields to their default values
    */
@@ -56,8 +54,8 @@ function SignInForm() {
   /**Function that signs in a user with their Google account.
  */
   async function signInWithGoogle() {
-    const { user } = await signInWithGooglePopup(); // signInWithGooglePopup is a Firebase method that allows users to sign in with their Google account using a popup window.
-    await createUserDocumentFromAuth(user) // createUserDocumentFromAuth is a function that creates a user document in the database if it doesn't already exist.
+    await signInWithGooglePopup(); // signInWithGooglePopup is a Firebase method that allows users to sign in with their Google account using a popup window.
+
   }
 
   /** Handles the form submit event
@@ -70,7 +68,6 @@ function SignInForm() {
 
     try {
       const { user } = await signInEmailAndPassword(email, password) // signInEmailAndPassword is a Firebase method that allows users to sign in with their email and password.
-      setCurrentUser(user); // set the current user in the user context
       resetFormFields(); // reset the form fields
     }
     catch (err) {

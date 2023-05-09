@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 5:15:01 pm
+ * Last Modified: Monday, 8th May 2023 8:14:24 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -24,11 +24,10 @@ import './navigation.style.scss';
  * @returns Navigation bar
  */
 function NavigationBar() {
-  const { currentUser, setCurrentUser } = useContext(UserContext)
+  const { currentUser } = useContext(UserContext)
 
   const signOutHandler = async () => {
     await signOutUser();
-    setCurrentUser(null);
   }
 
 

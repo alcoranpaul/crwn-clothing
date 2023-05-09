@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 5:14:15 pm
+ * Last Modified: Monday, 8th May 2023 8:07:06 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * Description: Firebase utility functions
@@ -20,7 +20,8 @@ import {
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    signOut
+    signOut,
+    onAuthStateChanged
 } from 'firebase/auth'
 import {
     getFirestore,
@@ -127,3 +128,10 @@ export const signInEmailAndPassword = async (email, password) => {
  * @returns 
  */
 export const signOutUser = async () => await signOut(auth);
+
+/** Function to listen to authentication state changes
+ * 
+ * @param {*} callback - Callback function to be called when authentication state changes
+ * @returns 
+ */
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
