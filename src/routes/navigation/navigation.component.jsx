@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 8:14:24 pm
+ * Last Modified: Tuesday, 9th May 2023 8:31:35 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -16,7 +16,10 @@ import { Outlet, Link } from 'react-router-dom'; // Outlet is a component that r
 import { Fragment, useContext } from 'react'; // Fragment is a component that allows multiple components to be rendered without a parent div
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 import { UserContext } from '../../contexts/user.contexts';
+import { CartDropdownContext } from '../../contexts/cart-dropdown.contexts';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
+import CartIcon from '../../components/cart-icon/cart-icon.component';
+import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 import './navigation.style.scss';
 
 /** Navigation Bar
@@ -25,6 +28,7 @@ import './navigation.style.scss';
  */
 function NavigationBar() {
   const { currentUser } = useContext(UserContext)
+  const { isDropdownOpen } = useContext(CartDropdownContext);
 
   const signOutHandler = async () => {
     await signOutUser();
@@ -53,7 +57,9 @@ function NavigationBar() {
             )
           }
 
+          <CartIcon />
         </div>
+        {isDropdownOpen && <CartDropdown />} {/*If isDropdownOpen is true, then render the CartDropdown component */}
       </div>
       <Outlet />
     </Fragment>

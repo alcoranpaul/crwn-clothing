@@ -5,11 +5,11 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 9:49:36 pm
+ * Last Modified: Tuesday, 9th May 2023 7:57:32 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
- * Description:
+ * Description: This file contains the context for the products
  */
 
 import { createContext, useState } from "react";
