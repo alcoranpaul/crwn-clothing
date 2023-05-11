@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Tuesday, 9th May 2023 8:31:35 pm
+ * Last Modified: Thursday, 11th May 2023 4:01:03 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -18,6 +18,7 @@ import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 import { UserContext } from '../../contexts/user.contexts';
 import { CartDropdownContext } from '../../contexts/cart-dropdown.contexts';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
+
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 import './navigation.style.scss';

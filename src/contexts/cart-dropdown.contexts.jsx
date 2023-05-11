@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 11th May 2023 3:05:27 pm
+ * Last Modified: Thursday, 11th May 2023 4:36:25 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -33,11 +33,35 @@ const addCartItem = (cartItems, productToAdd) => {
 
 }
 
+/** Remove an item from the cart
+ * 
+ * @param {*} cartItems  - the cart items
+ * @param {*} productToRemove  - the product to remove
+ * @returns  - the cart items
+ */
+const removeCartItem = (cartItems, productToRemove) => {
+    const existingCartItem = cartItems.find((cartItem) => cartItem.id === productToRemove.id); //find the item in the cart
+    if (existingCartItem) {
+        if (existingCartItem.quantity === 1) {
+            return cartItems.filter(cartItem => cartItem.id !== productToRemove.id); //filter the cart items
+        } //if the quantity is 1
+
+
+        return cartItems.map(cartItem =>
+            cartItem.id === productToRemove.id ? //if the item is already in the cart
+                { ...cartItem, quantity: cartItem.quantity - 1 } //decrease the quantity of the item
+                : cartItem //else return the cart item
+        )
+    }
+}
+
 export const CartDropdownContext = createContext({
     isDropdownOpen: false, // default value
     setIsDropdownOpen: () => { }, // dummy function
     cartItems: [], // default for cartItems
+
     addItemToCart: () => { }, // dummy function
+    removeItemFromCart: () => { }, // dummy function
     totalCartItems: 0 // default value
 });
 
@@ -53,18 +77,20 @@ export const CartDropdownProvider = ({ children }) => {
         setTotalCartItems(cartCount);
     }, [cartItems]);
 
-    /** Add an item to the cart
-     *  
-     * @param {*} product 
-     */
+    // Add an item to the cart
     const addItemToCart = (product) => {
         setCartItems(addCartItem(cartItems, product));
-    }
+    };
+
+    // Remove an item from the cart
+    const removeItemFromCart = (product) => {
+        setCartItems(removeCartItem(cartItems, product));
+    };
 
     const value = {
         isDropdownOpen, setIsDropdownOpen,
         cartItems, addItemToCart,
-        totalCartItems
+        totalCartItems, removeItemFromCart
     }; //Public functions and variables
     return (
         <CartDropdownContext.Provider value={value}>{children}</CartDropdownContext.Provider>
