@@ -5,14 +5,14 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Tuesday, 9th May 2023 10:05:24 pm
+ * Last Modified: Thursday, 11th May 2023 3:05:27 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description: 
  */
 
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 /** Add an item to the cart
  *  
@@ -38,11 +38,20 @@ export const CartDropdownContext = createContext({
     setIsDropdownOpen: () => { }, // dummy function
     cartItems: [], // default for cartItems
     addItemToCart: () => { }, // dummy function
+    totalCartItems: 0 // default value
 });
 
 export const CartDropdownProvider = ({ children }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
+    const [totalCartItems, setTotalCartItems] = useState(0);
+
+    useEffect(() => {
+        const cartCount = cartItems.reduce((total, cartItem) => {
+            return total + cartItem.quantity;
+        }, 0)
+        setTotalCartItems(cartCount);
+    }, [cartItems]);
 
     /** Add an item to the cart
      *  
@@ -52,7 +61,11 @@ export const CartDropdownProvider = ({ children }) => {
         setCartItems(addCartItem(cartItems, product));
     }
 
-    const value = { isDropdownOpen, setIsDropdownOpen, cartItems, addItemToCart }; //Public functions and variables
+    const value = {
+        isDropdownOpen, setIsDropdownOpen,
+        cartItems, addItemToCart,
+        totalCartItems
+    }; //Public functions and variables
     return (
         <CartDropdownContext.Provider value={value}>{children}</CartDropdownContext.Provider>
     );

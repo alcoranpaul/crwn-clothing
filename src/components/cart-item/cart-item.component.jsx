@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Tuesday, 9th May 2023 10:03:02 pm
+ * Last Modified: Thursday, 11th May 2023 2:54:28 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -14,11 +14,14 @@
 import './cart-item.styles.scss'
 
 const CartItem = ({ cartItem }) => {
-    const { name, quantity } = cartItem;
+    const { name, quantity, imageUrl, price } = cartItem;
     return (
-        <div className="cart-item">
-            <h2>{name}</h2>
-            <span>{quantity}</span>
+        <div className='cart-item-container'>
+            <img src={imageUrl} alt={`${name}`} />
+            <div className="item-details">
+                <span className='name'>{name}</span>
+                <span className='price'>{quantity} x ${price}</span>
+            </div>
         </div>
     );
 }
