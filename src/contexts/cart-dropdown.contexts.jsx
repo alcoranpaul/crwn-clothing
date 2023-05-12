@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 11th May 2023 4:36:25 pm
+ * Last Modified: Friday, 12th May 2023 4:02:59 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -55,26 +55,49 @@ const removeCartItem = (cartItems, productToRemove) => {
     }
 }
 
+/** Delete an item from the cart
+ * 
+ * @param {*} cartItems - the cart items
+ * @param {*} productToDelete - the product to delete
+ * @returns 
+ */
+const deleteCartItem = (cartItems, productToDelete) =>
+    cartItems.filter(cartItem => cartItem.id !== productToDelete.id); //filter the cart items
+
+
 export const CartDropdownContext = createContext({
     isDropdownOpen: false, // default value
     setIsDropdownOpen: () => { }, // dummy function
     cartItems: [], // default for cartItems
 
+    totalCartItems: 0, // default value
+    totalCartPrice: 0, // default value
     addItemToCart: () => { }, // dummy function
     removeItemFromCart: () => { }, // dummy function
-    totalCartItems: 0 // default value
+    deleteItemFromCart: () => { }, // dummy function
 });
 
 export const CartDropdownProvider = ({ children }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [totalCartItems, setTotalCartItems] = useState(0);
+    const [totalCartPrice, setTotalCartPrice] = useState(0);
 
+    //update the totalCartItems when the cartItems change
     useEffect(() => {
         const cartCount = cartItems.reduce((total, cartItem) => {
             return total + cartItem.quantity;
         }, 0)
+
         setTotalCartItems(cartCount);
+    }, [cartItems]);
+
+    //update the totalCartPrice when the cartItems change
+    useEffect(() => {
+        const cartPrice = cartItems.reduce((total, cartItem) => {
+            return total + (cartItem.price * cartItem.quantity);
+        }, 0)
+        setTotalCartPrice(cartPrice);
     }, [cartItems]);
 
     // Add an item to the cart
@@ -87,10 +110,16 @@ export const CartDropdownProvider = ({ children }) => {
         setCartItems(removeCartItem(cartItems, product));
     };
 
+    // Delete an item from the cart
+    const deleteItemFromCart = (product) => {
+        setCartItems(deleteCartItem(cartItems, product));
+    }
+
     const value = {
         isDropdownOpen, setIsDropdownOpen,
         cartItems, addItemToCart,
-        totalCartItems, removeItemFromCart
+        totalCartItems, removeItemFromCart,
+        totalCartPrice, deleteItemFromCart
     }; //Public functions and variables
     return (
         <CartDropdownContext.Provider value={value}>{children}</CartDropdownContext.Provider>

@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 11th May 2023 4:42:01 pm
+ * Last Modified: Friday, 12th May 2023 4:03:57 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -14,13 +14,13 @@
 
 import { useContext } from "react";
 import { CartDropdownContext } from "../../contexts/cart-dropdown.contexts";
-
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import "./checkout-styles.scss";
 
 const Checkout = () => {
-    const { cartItems, addItemToCart, removeItemFromCart } = useContext(CartDropdownContext);
+    const { cartItems, totalCartPrice } = useContext(CartDropdownContext);
     return (
-        <div className="checkout-containter">
+        <div className="checkout-container">
             <div className="checkout-header">
                 <div className="header-block">
                     <span>Products</span>
@@ -38,20 +38,9 @@ const Checkout = () => {
                     <span>Remove</span>
                 </div>
             </div>
-            {cartItems.map((cartItem) => {
-                const { id, name, imageUrl, price, quantity } = cartItem;
-                return (
-                    <div key={id}>
-                        <h2>{name}</h2>
-                        <span>{quantity}</span>
-                        <br />
-                        <span onClick={() => removeItemFromCart(cartItem)}>Decrement</span>
-                        <br />
-                        <span onClick={() => addItemToCart(cartItem)}>Increment</span>
-                    </div>
-                );
-            })}
-            <span className="total">Total: 0</span>
+            {cartItems.map((cartItem) =>
+                <CheckoutItem key={cartItem.id} cartItem={cartItem} />)}
+            <span className="total">Total: ${totalCartPrice}</span>
         </div>
     );
 };
