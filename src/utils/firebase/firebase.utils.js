@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 8:07:06 pm
+ * Last Modified: Friday, 12th May 2023 7:41:46 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * Description: Firebase utility functions
@@ -25,9 +25,13 @@ import {
 } from 'firebase/auth'
 import {
     getFirestore,
-    doc,        // Retrieve documents in Firestore
-    getDoc,     // Get data in documents
-    setDoc      // Set data in documents
+    doc,            // Retrieve documents in Firestore
+    getDoc,         // Get data in documents
+    setDoc,         // Set data in documents
+    collection,     // Retrieve collections in Firestore
+    writeBatch,     // Batch writes
+    query,         // Query collections
+    getDocs,        // Get data in collections
 } from 'firebase/firestore'
 
 //************************************* Firebase configuration *************************************************//
@@ -65,6 +69,35 @@ export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googlePro
 //**************************************************************************************************************//
 // Get the Firestore object
 export const db = getFirestore();
+
+// Define functions to create a user document from the user authentication object
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = collection(db, collectionKey); // Get the collection reference
+    const batch = writeBatch(db); // Get the batch object
+
+    objectsToAdd.forEach(obj => {
+        const newDocRef = doc(collectionRef, obj.title.toLowerCase()); // Get the document reference
+        batch.set(newDocRef, obj); // Add the object to the batch
+    });
+
+    await batch.commit(); // Commit the batch
+    console.log('Batch write successful');
+}
+
+// Function to convert a collection snapshot to an object
+export const getCategoriesAndDocuments = async () => {
+    const collectionRef = collection(db, 'categories'); // Get the collection reference
+    const q = query(collectionRef); //
+
+    const querySnapshot = await getDocs(q); // Get the collection snapshot
+    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => { // Convert the collection snapshot to an object
+        const { title, items } = docSnapshot.data(); // Get the title and items from the document snapshot
+        acc[title.toLowerCase()] = items; // Add the title and items to the object
+        return acc;
+    }, {});
+
+    return categoryMap;
+}
 
 /** Function to create a user document from the user authentication object
  * @param {*} userAuth - User authentication object
