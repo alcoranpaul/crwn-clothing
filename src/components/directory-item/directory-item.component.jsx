@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 4th May 2023 12:11:13 am
+ * Last Modified: Tuesday, 16th May 2023 5:24:28 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -13,21 +13,21 @@
  */
 
 
-import "./category-item.styles.scss"
+import "./directory-item.styles.scss"
 
 /**
  * 
  * @param {*} category - an object containing the category data 
  * @returns 
  */
-function CategoryItem({ category }) {
+function DirectoryItem({ category }) {
   const { imageUrl, title } = category
   return (
-    <div className="category-container">
+    <div className="directory-item-container">
       <div className='background-image' style={{
         backgroundImage: `url(${imageUrl})`
       }} />
-      <div className="category-body-container">
+      <div className="directory-item-body">
         <h2>{title}</h2>
         <p>Shop now</p>
       </div>
@@ -35,4 +35,4 @@ function CategoryItem({ category }) {
   );
 }
 
-export default CategoryItem;
+export default DirectoryItem;

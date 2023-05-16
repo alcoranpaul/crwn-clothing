@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 11th May 2023 4:01:03 pm
+ * Last Modified: Tuesday, 16th May 2023 4:15:58 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -26,7 +26,7 @@ function App() {
     <Routes>
       <Route path="/" element={<NavigationBar />}>
         <Route index element={<Home />} />
-        <Route path="shop" element={<Shop />} />
+        <Route path="shop/*" element={<Shop />} />
         <Route path="auth" element={<Authentication />} />
         <Route path="checkout" element={<Checkout />} />
       </Route>

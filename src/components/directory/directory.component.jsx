@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 4th May 2023 12:09:50 am
+ * Last Modified: Tuesday, 16th May 2023 5:26:15 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -13,7 +13,7 @@
  */
 
 import './directory.styles.scss'
-import CategoryItem from '../category-item/category-item.component';
+import DirectoryItem from '../directory-item/directory-item.component';
 
 /**
  * 
@@ -24,7 +24,7 @@ function Directory({ categories }) {
   return (
     <div className="categories-container">
       {categories.map((category) => (
-        <CategoryItem key={category.id} category={category} />
+        <DirectoryItem key={category.id} category={category} />
       )
       )}
     </div>
