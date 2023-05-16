@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Tuesday, 16th May 2023 5:25:04 pm
+ * Last Modified: Tuesday, 16th May 2023 5:31:56 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -17,4 +17,13 @@
     grid-template-columns: repeat(4,1fr); // 4 columns with equal width 
     column-gap: 20px;
     row-gap: 50px;
+
+  
 }
+
+  /* Styles for the title element */
+  .category-title {
+    font-size: 38px; /* Sets the font size to 28 pixels */
+    margin-bottom: 25px; /* Adds a margin at the bottom of the title */
+    text-align: center;
+  }
