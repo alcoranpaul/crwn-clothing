@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Tuesday, 16th May 2023 5:28:39 pm
+ * Last Modified: Friday, 19th May 2023 11:57:39 am
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -14,22 +14,22 @@
 
 import ProductCard from "../product-card/product-card.component";
 import { Link } from "react-router-dom";
-import './category-preview.styles.scss'
+import { CategoryPreviewContainer, Title, Preview } from './category-preview.styles'
 const CategoryPreview = ({ title, products }) => {
     return (
-        <div className="category-preview-container">
-            <h2>
+        <CategoryPreviewContainer>
+            <Title>
                 <Link className='nav-link' to={title}>
                     {title.toUpperCase()}
                 </Link>
-            </h2>
-            <div className="preview">
+            </Title>
+            <Preview>
                 {products
                     .filter((product, index) => index < 4)
                     .map((product) => (
                         <ProductCard key={product.id} product={product} />))}
-            </div>
-        </div>
+            </Preview>
+        </CategoryPreviewContainer>
     );
 }
 

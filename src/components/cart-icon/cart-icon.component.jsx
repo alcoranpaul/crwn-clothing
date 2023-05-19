@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 11th May 2023 3:05:41 pm
+ * Last Modified: Friday, 19th May 2023 11:46:14 am
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -14,8 +14,8 @@
 
 import { useContext } from 'react';
 import { CartDropdownContext } from '../../contexts/cart-dropdown.contexts';
-import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg'
-import './cart-icon.styles.scss'
+
+import { CartIconContainer, ShoppingIconContainer, ItemCount } from './cart-icon.styles'
 
 
 const CartIcon = () => {
@@ -24,10 +24,10 @@ const CartIcon = () => {
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
     return (
-        <div className='cart-icon-container' onClick={toggleDropdown}>
-            <ShoppingIcon className='shopping-icon' />
-            <span className='item-count'>{totalCartItems}</span>
-        </div>
+        <CartIconContainer onClick={toggleDropdown}>
+            <ShoppingIconContainer />
+            <ItemCount>{totalCartItems}</ItemCount>
+        </CartIconContainer>
     );
 }
 export default CartIcon;

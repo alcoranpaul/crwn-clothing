@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 18th May 2023 6:52:45 pm
+ * Last Modified: Friday, 19th May 2023 12:02:02 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -36,6 +36,10 @@ export const BaseButton = styled.button`
     background-color: white;
     color: black;
     border: 1px solid black;
+  }
+  @media (max-width: 760px) {
+    font-size: 12px;
+    padding: 0 20px 0 20px;
   }
 `;
 

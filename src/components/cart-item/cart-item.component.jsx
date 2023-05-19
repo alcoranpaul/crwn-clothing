@@ -5,24 +5,24 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 11th May 2023 2:54:28 pm
+ * Last Modified: Friday, 19th May 2023 11:53:23 am
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description:
  */
-import './cart-item.styles.scss'
+import { CartItemContainer, ItemDetailes } from './cart-item.styles'
 
 const CartItem = ({ cartItem }) => {
     const { name, quantity, imageUrl, price } = cartItem;
     return (
-        <div className='cart-item-container'>
+        <CartItemContainer>
             <img src={imageUrl} alt={`${name}`} />
-            <div className="item-details">
+            <ItemDetailes>
                 <span className='name'>{name}</span>
                 <span className='price'>{quantity} x ${price}</span>
-            </div>
-        </div>
+            </ItemDetailes>
+        </CartItemContainer>
     );
 }
 
