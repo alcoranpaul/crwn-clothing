@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 8:18:06 pm
+ * Last Modified: Thursday, 18th May 2023 7:02:45 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -13,9 +13,9 @@
  */
 
 import { useState } from 'react'; // import the useState hook from the React library
-import { signInWithGooglePopup, createUserDocumentFromAuth, signInEmailAndPassword } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/form-input.component';
-import Button from '../button/Button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/Button.component';
+import { signInWithGooglePopup, signInEmailAndPassword } from '../../utils/firebase/firebase.utils';
 import './signInForm.styles.scss'
 
 
@@ -27,7 +27,7 @@ const defaultFormFields = {
 
 
 // Changes the form fields to the values entered by the user
-function SignInForm() {
+const SignInForm = () => {
   // use the useState hook to create state variables for the form fields
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
@@ -67,7 +67,7 @@ function SignInForm() {
     event.preventDefault(); // prevent the default form submit behaviour
 
     try {
-      const { user } = await signInEmailAndPassword(email, password) // signInEmailAndPassword is a Firebase method that allows users to sign in with their email and password.
+      await signInEmailAndPassword(email, password) // signInEmailAndPassword is a Firebase method that allows users to sign in with their email and password.
       resetFormFields(); // reset the form fields
     }
     catch (err) {
@@ -109,7 +109,11 @@ function SignInForm() {
         />
         <div className='buttons-container'>
           <Button type='submit'>Sign In</Button>
-          <Button type='button' onClick={signInWithGoogle} buttonType='google'>Google sign in</Button>
+          <Button
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            type='button'
+            onClick={signInWithGoogle}
+          >Google sign in</Button>
         </div>
 
       </form>

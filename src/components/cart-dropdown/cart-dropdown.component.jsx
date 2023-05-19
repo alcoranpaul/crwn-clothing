@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 11th May 2023 4:08:12 pm
+ * Last Modified: Friday, 19th May 2023 12:21:00 am
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { CartDropdownContext } from '../../contexts/cart-dropdown.contexts';
 import Button from '../button/Button.component';
 import CartItem from '../cart-item/cart-item.component';
-import './cart-dropdown.styles.scss'
+import { CartdropdownContainer, EmptyMessage, CartItems } from './cart-dropdown.styles'
 
 
 const CartDropdown = () => {
@@ -28,14 +28,18 @@ const CartDropdown = () => {
     }
 
     return (
-        <div className='cart-dropdown-container'>
-            <div className='cart-items'>
-                {cartItems.map(cartItem => <CartItem key={cartItem.id} cartItem={cartItem} />)}
-            </div>
+        <CartdropdownContainer>
+            <CartItems>
+                {cartItems.length ? (
+                    cartItems.map(cartItem => <CartItem key={cartItem.id} cartItem={cartItem} />)
+                ) :
+                    (<EmptyMessage>Your Cart is empty</EmptyMessage>)}
+
+            </CartItems>
             <Button onClick={goToCheckoutHandler}>
                 Checkout
             </Button>
-        </div>
+        </CartdropdownContainer>
     );
 }
 

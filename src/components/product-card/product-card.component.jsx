@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Tuesday, 9th May 2023 10:02:23 pm
+ * Last Modified: Thursday, 18th May 2023 6:47:42 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -15,7 +15,7 @@
 import { useContext } from 'react';
 import { CartDropdownContext } from '../../contexts/cart-dropdown.contexts';
 import './product-card.styles.scss'
-import Button from '../button/Button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/Button.component';
 
 const ProductCard = ({ product }) => {
     const { addItemToCart } = useContext(CartDropdownContext);
@@ -31,7 +31,7 @@ const ProductCard = ({ product }) => {
                 <span className='name'>{name}</span>
                 <span className='price'>{price}</span>
             </div>
-            <Button buttonType='inverted' onClick={addProductToCart}>Add to cart</Button>
+            <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={addProductToCart}>Add to cart</Button>
 
         </div>
     );
