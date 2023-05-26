@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 25th May 2023 5:44:34 pm
+ * Last Modified: Friday, 26th May 2023 4:02:12 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -15,12 +15,50 @@
 import { DirectoryMenuContainer } from './directory.styles'
 import DirectoryItem from '../directory-item/directory-item.component';
 
+
+const categories = [
+  // Temporary data
+  {
+    id: 1,
+    title: 'hats',
+    imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+    route: 'shop/hats'
+  },
+  {
+    id: 2,
+    title: 'jackets',
+    imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+    route: 'shop/jackets'
+  },
+  {
+    id: 3,
+    title: 'sneakers',
+    imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+    route: 'shop/sneakers'
+  },
+  {
+    id: 4,
+    title: 'womens',
+    imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+    rotue: 'shop/womens'
+  },
+  {
+    id: 5,
+    title: 'mens',
+    imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+    route: 'shop/mens'
+  },
+];
+
 /**
  * 
  * @param {*} categories - an array of objects containing the category data
  * @returns 
  */
-function Directory({ categories }) {
+function Directory() {
+
+
+
   return (
     <DirectoryMenuContainer>
       {categories.map((category) => (
