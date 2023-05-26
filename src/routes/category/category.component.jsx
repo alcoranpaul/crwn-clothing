@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Tuesday, 16th May 2023 5:31:32 pm
+ * Last Modified: Thursday, 25th May 2023 10:45:46 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -16,7 +16,7 @@ import { useContext, useState, useEffect, Fragment } from 'react';
 import { CategoriesContext } from '../../contexts/categoriesMap.contexts';
 import { useParams } from 'react-router-dom';
 import ProductCard from '../../components/product-card/product-card.component';
-import './category.styles.scss'
+import { CategoryContainer, CategoryTitle } from './category.styles.jsx'
 
 const Category = () => {
     const { category } = useParams();
@@ -29,13 +29,13 @@ const Category = () => {
 
     return (
         <Fragment>
-            <h2 className='category-title'>{category.toUpperCase()}</h2>
-            <div className='category-container'>
+            <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
+            <CategoryContainer>
                 {
                     products && products.map((product) => (
                         <ProductCard key={product.id} product={product} />))
                 }
-            </div>
+            </CategoryContainer>
 
         </Fragment>
     );

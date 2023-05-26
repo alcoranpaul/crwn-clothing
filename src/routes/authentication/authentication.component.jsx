@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 4:33:57 pm
+ * Last Modified: Thursday, 25th May 2023 10:43:32 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -14,7 +14,7 @@
 
 import SignUpForm from "../../components/signUp/signUpForm.component"; // Importing SignUpForm component
 import SignInForm from "../../components/signIn/signInForm.component";
-import "./authentication.styles.scss";
+import { AuthenticationContainer } from "./authentication.styles.jsx";
 
 /** Authentication component
  * 
@@ -22,10 +22,10 @@ import "./authentication.styles.scss";
  */
 function SignIn() {
     return (
-        <div className="authentication-container">
+        <AuthenticationContainer>
             <SignInForm />
             <SignUpForm />
-        </div>
+        </AuthenticationContainer>
     );
 }
 

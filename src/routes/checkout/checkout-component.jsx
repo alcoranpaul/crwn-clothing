@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Friday, 12th May 2023 4:03:57 pm
+ * Last Modified: Thursday, 25th May 2023 10:48:11 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -15,33 +15,33 @@
 import { useContext } from "react";
 import { CartDropdownContext } from "../../contexts/cart-dropdown.contexts";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
-import "./checkout-styles.scss";
+import { CheckoutContainer, CheckoutHeader, HeaderBlock, Total } from "./checkout-styles.jsx";
 
 const Checkout = () => {
     const { cartItems, totalCartPrice } = useContext(CartDropdownContext);
     return (
-        <div className="checkout-container">
-            <div className="checkout-header">
-                <div className="header-block">
+        <CheckoutContainer>
+            <CheckoutHeader>
+                <HeaderBlock>
                     <span>Products</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Description</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Quantity</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Price</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Remove</span>
-                </div>
-            </div>
+                </HeaderBlock>
+            </CheckoutHeader>
             {cartItems.map((cartItem) =>
                 <CheckoutItem key={cartItem.id} cartItem={cartItem} />)}
-            <span className="total">Total: ${totalCartPrice}</span>
-        </div>
+            <Total>Total: ${totalCartPrice}</Total>
+        </CheckoutContainer>
     );
 };
 

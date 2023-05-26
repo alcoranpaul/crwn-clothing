@@ -5,24 +5,21 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 4:59:25 pm
+ * Last Modified: Thursday, 25th May 2023 11:24:06 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description:
  */
 
- .sign-in-container {
+import styled from 'styled-components';
+
+export const SignUpContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 380px;
-  
-    h2 {
-      margin: 10px 0;
+
+    h2{
+        margin: 10px 0;
     }
-  
-    .buttons-container {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
+`

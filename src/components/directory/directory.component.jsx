@@ -5,14 +5,14 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Tuesday, 16th May 2023 5:26:15 pm
+ * Last Modified: Thursday, 25th May 2023 5:44:34 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description: This component is the directory of categories
  */
 
-import './directory.styles.scss'
+import { DirectoryMenuContainer } from './directory.styles'
 import DirectoryItem from '../directory-item/directory-item.component';
 
 /**
@@ -22,12 +22,12 @@ import DirectoryItem from '../directory-item/directory-item.component';
  */
 function Directory({ categories }) {
   return (
-    <div className="categories-container">
+    <DirectoryMenuContainer>
       {categories.map((category) => (
         <DirectoryItem key={category.id} category={category} />
       )
       )}
-    </div>
+    </DirectoryMenuContainer>
   )
 }
 

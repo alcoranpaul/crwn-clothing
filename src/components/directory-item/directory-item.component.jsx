@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Tuesday, 16th May 2023 5:24:28 pm
+ * Last Modified: Thursday, 25th May 2023 5:52:57 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -13,7 +13,7 @@
  */
 
 
-import "./directory-item.styles.scss"
+import { DirectoryItemContainer, Body, BackgroundImage } from "./directory-item.styles.jsx"
 
 /**
  * 
@@ -23,15 +23,13 @@ import "./directory-item.styles.scss"
 function DirectoryItem({ category }) {
   const { imageUrl, title } = category
   return (
-    <div className="directory-item-container">
-      <div className='background-image' style={{
-        backgroundImage: `url(${imageUrl})`
-      }} />
-      <div className="directory-item-body">
+    <DirectoryItemContainer>
+      <BackgroundImage imageUrl={imageUrl} />
+      <Body>
         <h2>{title}</h2>
         <p>Shop now</p>
-      </div>
-    </div>
+      </Body>
+    </DirectoryItemContainer>
   );
 }
 

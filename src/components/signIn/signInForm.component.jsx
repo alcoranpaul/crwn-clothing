@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 18th May 2023 7:02:45 pm
+ * Last Modified: Thursday, 25th May 2023 7:40:58 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -16,7 +16,7 @@ import { useState } from 'react'; // import the useState hook from the React lib
 import FormInput from '../form-input/form-input.component';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/Button.component';
 import { signInWithGooglePopup, signInEmailAndPassword } from '../../utils/firebase/firebase.utils';
-import './signInForm.styles.scss'
+import { SignInContainer, ButtonsContainer } from './signInForm.styles.jsx'
 
 
 // set up an object with default values for the form fields
@@ -87,7 +87,7 @@ const SignInForm = () => {
 
   // return the form JSX
   return (
-    <div className='sign-in-container'>
+    <SignInContainer>
       <h2>Already have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -107,17 +107,17 @@ const SignInForm = () => {
           name='password'
           value={password}
         />
-        <div className='buttons-container'>
+        <ButtonsContainer>
           <Button type='submit'>Sign In</Button>
           <Button
             buttonType={BUTTON_TYPE_CLASSES.google}
             type='button'
             onClick={signInWithGoogle}
           >Google sign in</Button>
-        </div>
+        </ButtonsContainer>
 
       </form>
-    </div>
+    </SignInContainer>
   );
 }
 

@@ -5,20 +5,24 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 3:30:41 pm
+ * Last Modified: Thursday, 25th May 2023 7:38:10 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description: This component is the form input component
  */
 
-import './form-input.styles.scss'
+import { FormInputLabel, Input, Group } from './form-input.styles.jsx'
 
 export default function FormInput({ label, ...otherProps }) {
     return (
-        <div className="group">
-            <input className="form-input" {...otherProps} /> {/* the spread operator passes all the props to the input element */}
-            {label && <label className={`${otherProps.value.length ? `shrink` : ``} form-input-label`}>{label}</label>}
-        </div>
+        <Group>
+            <Input {...otherProps} /> {/* the spread operator passes all the props to the input element */}
+            {label &&
+                <FormInputLabel
+                    shrink={otherProps.value.length}>
+                    {label}
+                </FormInputLabel>}
+        </Group>
     );
 };

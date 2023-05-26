@@ -5,16 +5,18 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 4:33:56 pm
+ * Last Modified: Thursday, 25th May 2023 10:43:22 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description:
  */
 
- .authentication-container{
-    display: flex;
-    width: 900px;
-    justify-content: space-between;
-    margin: 30px auto;
- }
+import styled from "styled-components";
+
+export const AuthenticationContainer = styled.div`
+   display: flex;
+   width: 900px;
+   justify-content: space-between;
+   margin: 30px auto;
+`

@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Tuesday, 16th May 2023 4:23:05 pm
+ * Last Modified: Thursday, 25th May 2023 11:26:52 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -15,7 +15,7 @@
 import { Routes, Route } from 'react-router-dom';
 import CategoriesPreview from '../categories-preview/categories-preview.component';
 import Category from '../category/category.component';
-import './shop.styles.scss';
+// import { ProductsContainer } from './shop.styles.jsx';
 
 const Shop = () => {
 
