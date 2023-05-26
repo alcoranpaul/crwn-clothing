@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Friday, 26th May 2023 4:03:58 pm
+ * Last Modified: Friday, 26th May 2023 4:13:13 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -27,7 +27,7 @@ function DirectoryItem({ category }) {
 
   const onNavigateHandler = () => navigate(route);
   return (
-    <DirectoryItemContainer onCick={onNavigateHandler}>
+    <DirectoryItemContainer onClick={onNavigateHandler}>
       <BackgroundImage imageUrl={imageUrl} />
       <Body>
         <h2>{title}</h2>
