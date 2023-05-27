@@ -5,14 +5,15 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Friday, 12th May 2023 4:02:59 pm
+ * Last Modified: Friday, 26th May 2023 7:21:06 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description: 
  */
 
-import { createContext, useState, useEffect } from "react";
+import { createContext, useReducer } from "react";
+import { createAction } from "../utils/reducer/reducer.utils";
 
 /** Add an item to the cart
  *  
@@ -64,6 +65,39 @@ const removeCartItem = (cartItems, productToRemove) => {
 const deleteCartItem = (cartItems, productToDelete) =>
     cartItems.filter(cartItem => cartItem.id !== productToDelete.id); //filter the cart items
 
+export const CART_ACTION_TYPES = {
+    SET_CART_ITEMS: "SET_CART_ITEMS",
+    SET_IS_CART_OPEN: "SET_IS_CART_OPEN"
+}
+
+const INITIAL_STATE = {
+    cartItems: [],
+    totalCartItems: 0,
+    totalCartPrice: 0,
+    isDropdownOpen: false
+}
+
+
+const cartReducer = (state, action) => {
+    const { type, payload } = action;  // Destructure action object
+    switch (type) {
+        case CART_ACTION_TYPES.SET_CART_ITEMS:
+            return {
+                ...state, //Spread the previous state
+                ...payload
+            }
+        case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+            return {
+                ...state, //Spread the previous state
+                isDropdownOpen: payload
+            }
+
+        default:
+            throw new Error(`Unhandled action type: ${type} in cartReducer`);
+    }
+}
+
+
 
 export const CartDropdownContext = createContext({
     isDropdownOpen: false, // default value
@@ -78,41 +112,53 @@ export const CartDropdownContext = createContext({
 });
 
 export const CartDropdownProvider = ({ children }) => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
-    const [totalCartItems, setTotalCartItems] = useState(0);
-    const [totalCartPrice, setTotalCartPrice] = useState(0);
 
-    //update the totalCartItems when the cartItems change
-    useEffect(() => {
-        const cartCount = cartItems.reduce((total, cartItem) => {
+    const [{ cartItems, totalCartItems, totalCartPrice, isDropdownOpen }, dispatch] = useReducer(cartReducer, INITIAL_STATE)
+
+    const updateCartItemsReducer = (newCartItems) => {
+        // Generate Cart Count
+        const cartCount = newCartItems.reduce((total, cartItem) => {
             return total + cartItem.quantity;
         }, 0)
 
-        setTotalCartItems(cartCount);
-    }, [cartItems]);
-
-    //update the totalCartPrice when the cartItems change
-    useEffect(() => {
-        const cartPrice = cartItems.reduce((total, cartItem) => {
+        // Generate Cart Price
+        const cartPrice = newCartItems.reduce((total, cartItem) => {
             return total + (cartItem.price * cartItem.quantity);
         }, 0)
-        setTotalCartPrice(cartPrice);
-    }, [cartItems]);
+
+        dispatch(createAction(
+            CART_ACTION_TYPES.SET_CART_ITEMS,
+            {
+                cartItems: newCartItems,
+                totalCartItems: cartCount,
+                totalCartPrice: cartPrice
+            }
+        ))
+    }
 
     // Add an item to the cart
     const addItemToCart = (product) => {
-        setCartItems(addCartItem(cartItems, product));
+        const newCartItems = addCartItem(cartItems, product);
+        updateCartItemsReducer(newCartItems);
     };
 
     // Remove an item from the cart
     const removeItemFromCart = (product) => {
-        setCartItems(removeCartItem(cartItems, product));
+        const newCartItems = removeCartItem(cartItems, product);
+        updateCartItemsReducer(newCartItems);
     };
 
     // Delete an item from the cart
     const deleteItemFromCart = (product) => {
-        setCartItems(deleteCartItem(cartItems, product));
+        const newCartItems = deleteCartItem(cartItems, product);
+        updateCartItemsReducer(newCartItems);
+    }
+
+    const setIsDropdownOpen = (isOpen) => {
+        dispatch(
+            createAction(
+                CART_ACTION_TYPES.SET_IS_CART_OPEN,
+                isOpen))
     }
 
     const value = {

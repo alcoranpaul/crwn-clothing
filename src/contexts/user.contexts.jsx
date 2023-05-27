@@ -5,15 +5,16 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Monday, 8th May 2023 8:20:04 pm
+ * Last Modified: Friday, 26th May 2023 7:22:47 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description: This component is the user context
  */
 
-import { createContext, useState, useEffect } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from "../utils/firebase/firebase.utils";
+import { createAction } from "../utils/reducer/reducer.utils";
 
 // Create a context object - actual values you want to access
 export const UserContext = createContext({
@@ -21,9 +22,37 @@ export const UserContext = createContext({
     setCurrentUser: () => null
 });
 
+export const USER_ACTION_TYPES = {
+    SET_CURRENT_USER: "SET_CURRENT_USER"
+}
+
+const userReducer = (state, action) => {
+    const { type, payload } = action;  // Destructure action object
+    switch (type) {
+        case USER_ACTION_TYPES.SET_CURRENT_USER:
+            return {
+                ...state, //Spread the previous state 
+                currentUser: payload // Update currentUser and overwrite existing value with payload
+            }
+        default:
+            throw new Error(`Unhandled action type: ${type} in userReducer`);
+
+    }
+}
+
+const INITIAL_STATE = {
+    currentUser: null
+}
+
 export function UserProvider({ children }) {
-    const [currentUser, setCurrentUser] = useState(null); // Initial value is null
-    const value = { currentUser, setCurrentUser } // Value that will be passed to the provider
+    const [state, dispatch] = useReducer(userReducer, INITIAL_STATE)
+
+    const { currentUser } = state; // Destructure currentUser from state
+    const setCurrentUser = (user) => { // Create a function that will update the currentUser
+        dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user))
+    }
+
+    const value = { currentUser, setCurrentUser };
 
     // Unsuscribe from the listener when the component unmounts
     useEffect(() => {
