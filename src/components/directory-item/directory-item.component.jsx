@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Friday, 26th May 2023 4:13:13 pm
+ * Last Modified: Saturday, 27th May 2023 11:40:37 am
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -22,13 +22,13 @@ import { useNavigate } from "react-router-dom";
  * @returns 
  */
 function DirectoryItem({ category }) {
-  const { imageUrl, title, route } = category
+  const { imageurl, title, route } = category
   const navigate = useNavigate();
 
   const onNavigateHandler = () => navigate(route);
   return (
     <DirectoryItemContainer onClick={onNavigateHandler}>
-      <BackgroundImage imageUrl={imageUrl} />
+      <BackgroundImage imageurl={imageurl} />
       <Body>
         <h2>{title}</h2>
         <p>Shop now</p>

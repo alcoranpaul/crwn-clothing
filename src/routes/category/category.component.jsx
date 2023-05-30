@@ -5,22 +5,23 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 25th May 2023 10:45:46 pm
+ * Last Modified: Monday, 29th May 2023 9:41:22 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
  * Description:
  */
 
-import { useContext, useState, useEffect, Fragment } from 'react';
-import { CategoriesContext } from '../../contexts/categoriesMap.contexts';
+import { useState, useEffect, Fragment } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCategoriesMap } from '../../store/category/category.selector';
 import { useParams } from 'react-router-dom';
 import ProductCard from '../../components/product-card/product-card.component';
 import { CategoryContainer, CategoryTitle } from './category.styles.jsx'
 
 const Category = () => {
     const { category } = useParams();
-    const { categoriesMap } = useContext(CategoriesContext);
+    const categoriesMap = useSelector(selectCategoriesMap);
     const [products, setProducts] = useState(categoriesMap[category]);
 
     useEffect(() => {

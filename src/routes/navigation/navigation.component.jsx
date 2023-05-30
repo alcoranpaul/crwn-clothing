@@ -5,7 +5,7 @@
  * Author: Paul Adrian Reyes (paulreyes74@yahoo.com)
  * GitHub: https://github.com/alcoranpaul
  * -----
- * Last Modified: Thursday, 18th May 2023 3:23:23 pm
+ * Last Modified: Saturday, 27th May 2023 2:49:04 pm
  * Modified By: PR (paulreyes74@yahoo.com>)
  * -----
  * -----
@@ -15,9 +15,11 @@
 import { Outlet } from 'react-router-dom'; // Outlet is a component that renders the child route's component
 import { Fragment, useContext } from 'react'; // Fragment is a component that allows multiple components to be rendered without a parent div
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
-import { UserContext } from '../../contexts/user.contexts';
+
+import { selectCurrentUser } from '../../store/user/user.selector';
 import { CartDropdownContext } from '../../contexts/cart-dropdown.contexts';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
+import { useSelector } from 'react-redux';
 
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
@@ -28,7 +30,7 @@ import { NavLink, NavLinks, NavigationContainer, LogoContainer } from './navigat
  * @returns Navigation bar
  */
 function NavigationBar() {
-  const { currentUser } = useContext(UserContext)
+  const currentUser = useSelector(selectCurrentUser);
   const { isDropdownOpen } = useContext(CartDropdownContext);
 
   const signOutHandler = async () => {
